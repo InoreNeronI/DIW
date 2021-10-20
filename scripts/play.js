@@ -3,7 +3,7 @@
 //ELEMENT SELECTORS
 const player = document.querySelector('.player');
 const video = document.querySelector('#video');
-const playBtn = document.querySelector('.play-btn');
+const playBtn = document.querySelector('#control-play');
 const stopBtn = document.querySelector('#control-stop');
 const volumeBtn = document.querySelector('.volume-btn');
 const volumeSlider = document.querySelector('.volume-slider');
@@ -17,28 +17,28 @@ const fullscreenBtn =document.querySelector('.fullscreen');
 
 //GLOBAL VARS
 let lastVolume = 1;
-let isMouseDown = false;
 
 //PLAYER FUNCTIONS
 function stopPlay(ev) {
 	ev.preventDefault();
-	if (!video.paused) {
-		playBtn.classList.toggle('paused');
-	}
 	video.pause();
 	video.currentTime = 0;
 }
 
-function togglePlay() {
+function togglePlay(ev) {
+	ev.preventDefault();
 	if (video.paused) {
 		video.play();
 	} else {
 		video.pause();
 	}
-	playBtn.classList.toggle('paused');
 }
 function togglePlayBtn() {
-	playBtn.classList.toggle('playing');
+	if (video.paused) {
+		playBtn.textContent = 'play_arrow';
+	} else {
+		playBtn.textContent = 'pause';
+	}
 }
 
 function toggleMute() {
@@ -75,11 +75,10 @@ function neatTime(time) {
 	seconds = seconds > 9 ? seconds : `0${seconds}`;
 	return `${minutes}:${seconds}`;
 }
-function updateProgress(e) {
+function updateProgress() {
 	progressFill.style.width = `${video.currentTime / video.duration * 100}%`;
 	textCurrent.innerHTML = `${neatTime(video.currentTime)} / ${neatTime(video.duration)}`;
 	// textTotal.innerHTML = neatTime(video.duration);
-	// console.log(progressFill.style.width);
 }
 function setProgress({offsetX}) {
 	const newTime = offsetX/progressSlider.offsetWidth;
@@ -120,7 +119,7 @@ function setSpeed(e) {
 function handleKeypress({key}) {
 	switch (key) {
 		case ' ':
-			togglePlay();
+			togglePlay(new Event('click'));
 		case 'ArrowRight':
 			video.currentTime += 5;
 		case 'ArrowLeft':
@@ -137,10 +136,7 @@ video.addEventListener('play', togglePlayBtn);
 video.addEventListener('pause', togglePlayBtn);
 video.addEventListener('ended', togglePlayBtn);
 video.addEventListener('timeupdate', updateProgress);
-video.addEventListener('canplay', updateProgress);
 volumeBtn.addEventListener('click', toggleMute);
-window.addEventListener('mousedown', () => isMouseDown = true);
-window.addEventListener('mouseup', () => isMouseDown = false);
 volumeSlider.addEventListener('click', changeVolume);
 progressSlider.addEventListener('click', setProgress);
 fullscreenBtn.addEventListener('click', toggleFullscreen);
@@ -177,9 +173,6 @@ function playVideo(ID) {
 	mp4.setAttribute('src', mp4Url);
 	webm.setAttribute('src', webmUrl);
 	selected.setAttribute('value', ID);
-	if (video.paused) {
-		playBtn.classList.toggle('paused');
-	}
 	video.load();
 	video.play();
 }
@@ -188,10 +181,10 @@ function playVideo(ID) {
 document.getElementById('control-previous').addEventListener('click', ev => {
 	ev.preventDefault();
 	const id = parseInt(selected.getAttribute('value'));
-	playVid(id === 1 ? 4 : id - 1);
+	playVideo(id === 1 ? 4 : id - 1);
 });
 document.getElementById('control-next').addEventListener('click', ev => {
 	ev.preventDefault();
 	const id = parseInt(selected.getAttribute('value'));
-	playVid(id === 4 ? 1 : id + 1);
+	playVideo(id === 4 ? 1 : id + 1);
 });
