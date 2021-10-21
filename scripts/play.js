@@ -13,7 +13,7 @@ const progressFill = document.querySelector('.progress-filled');
 const textCurrent = document.querySelector('.time-current');
 //const textTotal = document.querySelector('.time-total');
 const speedBtns = document.querySelectorAll('.speed-item');
-const fullscreenBtn =document.querySelector('.fullscreen');
+const fullscreenBtn = document.querySelector('#control-fullscreen');
 
 //GLOBAL VARS
 let lastVolume = 1;
@@ -42,7 +42,7 @@ function togglePlayBtn() {
 }
 
 function toggleMute() {
-	if(video.volume) {
+	if (video.volume) {
 		lastVolume = video.volume;
 		video.volume = 0;
 		volumeBtn.classList.add('muted');
@@ -54,24 +54,24 @@ function toggleMute() {
 	}
 }
 function changeVolume({offsetX}) {
-		volumeBtn.classList.remove('muted');
-		let volume = offsetX / volumeSlider.offsetWidth;
-		volume < 0.1 ? volume = 0 : volume;
-		volumeFill.style.width = `${volume*100}%`;
-		video.volume = volume;
-		if (volume > 0.7) {
-			volumeBtn.classList.add('loud');
-		} else if (volume < 0.7 && volume > 0) {
-			volumeBtn.classList.remove('loud');
-		} else if (volume === 0) {
-			volumeBtn.classList.add('muted');
-		}
-		lastVolume = volume;
+	volumeBtn.classList.remove('muted');
+	let volume = offsetX / volumeSlider.offsetWidth;
+	volume < 0.1 ? volume = 0 : volume;
+	volumeFill.style.width = `${volume*100}%`;
+	video.volume = volume;
+	if (volume > 0.7) {
+		volumeBtn.classList.add('loud');
+	} else if (volume < 0.7 && volume > 0) {
+		volumeBtn.classList.remove('loud');
+	} else if (volume === 0) {
+		volumeBtn.classList.add('muted');
+	}
+	lastVolume = volume;
 }
 function neatTime(time) {
-  // var hours = Math.floor((time % 86400)/3600)
-  const minutes = Math.floor((time % 3600)/60);
-  let seconds = Math.floor(time % 60);
+	// const hours = Math.floor((time % 86400) / 3600)
+	const minutes = Math.floor((time % 3600) / 60);
+	let seconds = Math.floor(time % 60);
 	seconds = seconds > 9 ? seconds : `0${seconds}`;
 	return `${minutes}:${seconds}`;
 }
@@ -86,32 +86,38 @@ function setProgress({offsetX}) {
 	video.currentTime = newTime*video.duration;
 }
 function launchIntoFullscreen(element) {
-  if(element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if(element.mozRequestFullScreen) {
-    element.mozRequestFullScreen();
-  } else if(element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen();
-  } else if(element.msRequestFullscreen) {
-    element.msRequestFullscreen();
-  }
+	if (element.requestFullscreen) {
+		element.requestFullscreen();
+	} else if (element.mozRequestFullScreen) {
+		element.mozRequestFullScreen();
+	} else if (element.webkitRequestFullscreen) {
+		element.webkitRequestFullscreen();
+	} else if (element.msRequestFullscreen) {
+		element.msRequestFullscreen();
+	}
 }
 function exitFullscreen() {
-  if(document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if(document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-  } else if(document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  }
+	if (document.exitFullscreen) {
+		document.exitFullscreen();
+	} else if (document.mozCancelFullScreen) {
+		document.mozCancelFullScreen();
+	} else if (document.webkitExitFullscreen) {
+		document.webkitExitFullscreen();
+	}
 }
 let fullscreen = false;
-function toggleFullscreen() {
-	fullscreen? exitFullscreen() : launchIntoFullscreen(player)
+function toggleFullscreen(ev) {
+	ev.preventDefault();
+	if (fullscreen) {
+		exitFullscreen();
+		fullscreenBtn.textContent = 'fullscreen';
+	} else {
+		launchIntoFullscreen(player);
+		fullscreenBtn.textContent = 'fullscreen_exit';
+	}
 	fullscreen = !fullscreen;
 }
-function setSpeed(e) {
-	console.log(parseFloat(this.dataset.speed));
+function setSpeed() {
 	video.playbackRate = this.dataset.speed;
 	speedBtns.forEach(({classList}) => classList.remove('active'));
 	this.classList.add('active');
@@ -120,12 +126,13 @@ function handleKeypress({key}) {
 	switch (key) {
 		case ' ':
 			togglePlay(new Event('click'));
+			break;
 		case 'ArrowRight':
 			video.currentTime += 5;
+			break;
 		case 'ArrowLeft':
 			video.currentTime -= 5;
-		default:
-			return;
+			break;
 	}
 }
 //EVENT LISTENERS
