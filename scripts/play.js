@@ -5,7 +5,7 @@ const player = document.querySelector('.player');
 const video = document.querySelector('#video');
 const playBtn = document.querySelector('#control-play');
 const stopBtn = document.querySelector('#control-stop');
-const volumeBtn = document.querySelector('.volume-btn');
+const volumeBtn = document.querySelector('#control-volume');
 const volumeSlider = document.querySelector('.volume-slider');
 const volumeFill = document.querySelector('.volume-filled');
 const progressSlider = document.querySelector('.progress');
@@ -41,31 +41,35 @@ function togglePlayBtn() {
 	}
 }
 
-function toggleMute() {
+function syncVolume(volume) {
+	if (volume > 0.5) {
+		volumeBtn.textContent = 'volume_up';
+	} else if (volume < 0.5 && volume > 0) {
+		volumeBtn.textContent = 'volume_down';
+	} else if (volume === 0) {
+		volumeBtn.textContent = 'volume_mute';
+	}
+}
+
+function toggleMute(ev) {
+	ev.preventDefault();
 	if (video.volume) {
 		lastVolume = video.volume;
 		video.volume = 0;
-		volumeBtn.classList.add('muted');
-		volumeFill.style.width = 0;
+		volumeBtn.textContent = 'volume_mute';
+		volumeFill.style.width = '0';
 	} else {
 		video.volume = lastVolume;
-		volumeBtn.classList.remove('muted');
-		volumeFill.style.width = `${lastVolume*100}%`;
+		syncVolume(video.volume);
+		volumeFill.style.width = `${video.volume * 100}%`;
 	}
 }
 function changeVolume({offsetX}) {
-	volumeBtn.classList.remove('muted');
 	let volume = offsetX / volumeSlider.offsetWidth;
 	volume < 0.1 ? volume = 0 : volume;
-	volumeFill.style.width = `${volume*100}%`;
+	volumeFill.style.width = `${volume * 100}%`;
 	video.volume = volume;
-	if (volume > 0.7) {
-		volumeBtn.classList.add('loud');
-	} else if (volume < 0.7 && volume > 0) {
-		volumeBtn.classList.remove('loud');
-	} else if (volume === 0) {
-		volumeBtn.classList.add('muted');
-	}
+	syncVolume(volume);
 	lastVolume = volume;
 }
 function neatTime(time) {

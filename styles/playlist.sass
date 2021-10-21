@@ -1,0 +1,97 @@
+
+/* @see https://codepen.io/summercodes/pen/bGqLYmv
+
+.playlist
+  width: calc(100% - #{1rem})
+  overflow: auto
+
+  a.song
+    display: block
+    width: fit-content
+    width: -moz-fit-content
+    padding: 2vmin 2vmin calc(2vmin - 2px) 0
+    margin: 5px 0 5px auto
+    background: rgba(#008cff, 0.4)
+    background: linear-gradient(to top, rgba(#008cff, 1), rgba(#ffd700, 1))
+    background-attachment: fixed
+    background-position: center
+    text-align: right
+    text-transform: uppercase
+    color: rgba(#541e3d, 1)
+    position: relative
+    z-index: 102
+
+    &.active
+      color: #9370db
+      b::before
+        background: rgba(#00008B, 0.4)
+
+    b
+      letter-spacing: 1px
+      font-weight: 800
+      font-size: .9rem
+      text-transform: lowercase
+      margin-right: 7px
+      position: relative
+
+      &::before
+        position: absolute
+        bottom: -3px
+        left: -3px
+        content: ''
+        width: calc(100% + 6px)
+        height: 1px
+        background: rgba(#ffffff, 0.4)
+
+    &:nth-of-type(6n+1)
+      animation: equalz 1.6s ease-in-out infinite alternate
+
+    &:nth-of-type(6n+2)
+      animation: equalz 2s ease-in-out infinite alternate
+
+    &:nth-of-type(6n+3)
+      animation: equalz 2.5s ease-in-out infinite alternate
+
+    &:nth-of-type(6n+4)
+      animation: equalz 2.3s ease-in-out infinite alternate
+
+    &:nth-of-type(6n+5)
+      animation: equalz 1.8s ease-in-out infinite alternate
+
+    &:nth-of-type(6n+6)
+      animation: equalz 2s ease-in-out infinite alternate
+
+@keyframes equalz
+  0%
+    border-left: 6vmin solid rgba(0, 0, 0, 0)
+
+  25%
+    border-left: 10vmin solid rgba(0, 0, 0, 0)
+
+  50%
+    border-left: 8vmin solid rgba(0, 0, 0, 0)
+
+  75%
+    border-left: 14vmin solid rgba(0, 0, 0, 0)
+
+  100%
+    border-left: 6vmin solid rgba(0, 0, 0, 0)
+
+@keyframes groove
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(5deg)
+
+@media (max-width: 500px)
+  *
+    -webkit-animation: none !important
+    -moz-animation: none !important
+    -o-animation: none !important
+    animation: none !important
+
+  .playlist a.song
+    padding: 2vmin 2vmin calc(2vmin - 2px) 2vmin
+    text-align: center
+    line-height: 200%
