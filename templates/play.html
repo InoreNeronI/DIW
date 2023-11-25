@@ -1,79 +1,128 @@
 <!-- @see https://codepen.io/tahadib/pen/vYOEdBp -->
 <extends src="index.html">
-    <block name="styles" type="append">
-        <link rel="stylesheet" href="../styles/play.sass">
-        <link rel="stylesheet" href="../styles/playlist.sass">
-    </block>
-    <block name="content">
-        <div class="d-flex align-items-center h-100">
-            <div class="d-flex container justify-content-center mx-auto text-center">
-                <div class="player-container">
-                    <div class="player">
-                        <video id="video">
-                            <source id="mp4" src="https://www.fredrickjaxx.is/_assets/video/blossoms.mp4" type="video/mp4">
-			                <source id="webm" src="https://www.fredrickjaxx.is/_assets/video/blossoms.Webm" type="video/webm">
-                        </video>
-                        <div class="controls">
-                            <div class="text-white time"><span class="time-current"></span><span class="time-total"></span></div>
-                            <div class="progress">
-                                <div class="progress-filled"></div>
-                            </div>
-                            <div class="d-flex justify-content-between controls-main">
-                                <div class="d-flex align-items-center">
-                                    <a href="" id="control-previous" class="material-icons text-white" title="Previous">skip_previous</a>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="" id="control-stop" class="material-icons text-white" title="Stop">stop</a>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="" id="control-play" class="material-icons text-white" title="Play / Pause">play_arrow</a>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="" id="control-next" class="material-icons text-white" title="Next">skip_next</a>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <ul class="speed-list">
-                                        <li class="speed-item" data-speed="0.5">0.5x</li>
-                                        <li class="speed-item" data-speed="0.75">0.75x</li>
-                                        <li class="speed-item active" data-speed="1">1x</li>
-                                        <li class="speed-item" data-speed="1.5">1.5x</li>
-                                        <li class="speed-item" data-speed="2">2x</li>
-                                    </ul>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <div class="volume-slider">
-                                        <div class="volume-filled"></div>
-                                    </div>
-                                    <a href="" id="control-volume" class="material-icons text-white" title="Previous">volume_up</a>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <a href="" id="control-fullscreen" class="material-icons text-white" title="Fullscreen">fullscreen</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <block name="styles" type="append">
+    <link rel="stylesheet" href="../styles/play.sass" />
+    <link rel="stylesheet" href="../styles/playlist.sass" />
+  </block>
+  <block name="content">
+    <div class="d-flex align-items-center h-100">
+      <div class="d-flex container justify-content-center mx-auto text-center">
+        <div class="player-container">
+          <div class="player">
+            <video id="video">
+              <source
+                id="mp4"
+                src="https://www.fredrickjaxx.is/_assets/video/blossoms.mp4"
+                type="video/mp4"
+              />
+              <source
+                id="webm"
+                src="https://www.fredrickjaxx.is/_assets/video/blossoms.Webm"
+                type="video/webm"
+              />
+            </video>
+            <div class="controls">
+              <div class="text-white time">
+                <span class="time-current"></span
+                ><span class="time-total"></span>
+              </div>
+              <div class="progress">
+                <div class="progress-filled"></div>
+              </div>
+              <div class="d-flex justify-content-between controls-main">
+                <div class="d-flex align-items-center">
+                  <a
+                    href=""
+                    id="control-previous"
+                    class="material-icons text-white"
+                    title="Previous"
+                    >skip_previous</a
+                  >
                 </div>
+                <div class="d-flex align-items-center">
+                  <a
+                    href=""
+                    id="control-stop"
+                    class="material-icons text-white"
+                    title="Stop"
+                    >stop</a
+                  >
+                </div>
+                <div class="d-flex align-items-center">
+                  <a
+                    href=""
+                    id="control-play"
+                    class="material-icons text-white"
+                    title="Play / Pause"
+                    >play_arrow</a
+                  >
+                </div>
+                <div class="d-flex align-items-center">
+                  <a
+                    href=""
+                    id="control-next"
+                    class="material-icons text-white"
+                    title="Next"
+                    >skip_next</a
+                  >
+                </div>
+                <div class="d-flex align-items-center">
+                  <ul class="speed-list">
+                    <li class="speed-item" data-speed="0.5">0.5x</li>
+                    <li class="speed-item" data-speed="0.75">0.75x</li>
+                    <li class="speed-item active" data-speed="1">1x</li>
+                    <li class="speed-item" data-speed="1.5">1.5x</li>
+                    <li class="speed-item" data-speed="2">2x</li>
+                  </ul>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="volume-slider">
+                    <div class="volume-filled"></div>
+                  </div>
+                  <a
+                    href=""
+                    id="control-volume"
+                    class="material-icons text-white"
+                    title="Previous"
+                    >volume_up</a
+                  >
+                </div>
+                <div class="d-flex align-items-center">
+                  <a
+                    href=""
+                    id="control-fullscreen"
+                    class="material-icons text-white"
+                    title="Fullscreen"
+                    >fullscreen</a
+                  >
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </block>
-    <block name="sidebar">
-        <h2 class="text-center">Videos</h2>
-        <section class="d-flex justify-content-center">
-			<div class="thumb" onclick="playVideo(1)">one</div>
-			<div class="thumb" onclick="playVideo(2)">two</div>
-			<div class="thumb" onclick="playVideo(3)">three</div>
-			<div class="thumb" onclick="playVideo(4)">four</div>
-            <input id="selected" type="hidden" value="1">
-		</section>
-        <h2 class="text-center">Audios</h2>
-        <section class="playlist">
-            <a class="song" href="../media/AC-DC.mp3"><b>AC-DC</b></a>
-            <a class="song" href="../media/Aretha.mp3"><b>Aretha</b></a>
-            <a class="song" href="../media/Bob%20Marley.mp3"><b>Bob Marley</b></a>
-            <a class="song" href="../media/Red%20Hot%20Chili%20Peppers.mp3"><b>Red Hot</b></a>
-        </section>
-    </block>
-    <block name="scripts" type="append">
-        <script src="../scripts/play.js"></script>
-    </block>
+      </div>
+    </div>
+  </block>
+  <block name="sidebar">
+    <h2 class="text-center">Videos</h2>
+    <section class="d-flex justify-content-center">
+      <div class="thumb" onclick="playVideo(1)">one</div>
+      <div class="thumb" onclick="playVideo(2)">two</div>
+      <div class="thumb" onclick="playVideo(3)">three</div>
+      <div class="thumb" onclick="playVideo(4)">four</div>
+      <input id="selected" type="hidden" value="1" />
+    </section>
+    <h2 class="text-center">Audios</h2>
+    <section class="playlist">
+      <a class="song" href="../media/AC-DC.mp3"><b>AC-DC</b></a>
+      <a class="song" href="../media/Aretha.mp3"><b>Aretha</b></a>
+      <a class="song" href="../media/Bob%20Marley.mp3"><b>Bob Marley</b></a>
+      <a class="song" href="../media/Red%20Hot%20Chili%20Peppers.mp3"
+        ><b>Red Hot</b></a
+      >
+    </section>
+  </block>
+  <block name="scripts" type="append">
+    <script src="../scripts/play.js"></script>
+  </block>
 </extends>

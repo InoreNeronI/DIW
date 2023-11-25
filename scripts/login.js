@@ -1,55 +1,54 @@
-
 // @see https://codepen.io/ainalem/pen/EQXjOR
 
 let current = null;
 
-document.querySelector('#email').addEventListener('focus', e => {
+document.querySelector("#email").addEventListener("focus", (e) => {
   if (current) current.pause();
   current = anime({
-    targets: 'path',
+    targets: "path",
     strokeDashoffset: {
       value: 0,
       duration: 700,
-      easing: 'easeOutQuart'
+      easing: "easeOutQuart",
     },
     strokeDasharray: {
-      value: '240 1386',
+      value: "240 1386",
       duration: 700,
-      easing: 'easeOutQuart'
-    }
+      easing: "easeOutQuart",
+    },
   });
 });
 
-document.querySelector('#password').addEventListener('focus', e => {
+document.querySelector("#password").addEventListener("focus", (e) => {
   if (current) current.pause();
   current = anime({
-    targets: 'path',
+    targets: "path",
     strokeDashoffset: {
       value: -336,
       duration: 700,
-      easing: 'easeOutQuart'
+      easing: "easeOutQuart",
     },
     strokeDasharray: {
-      value: '240 1386',
+      value: "240 1386",
       duration: 700,
-      easing: 'easeOutQuart'
-    }
+      easing: "easeOutQuart",
+    },
   });
 });
 
-document.querySelector('#submit').addEventListener('focus', e => {
+document.querySelector("#submit").addEventListener("focus", (e) => {
   if (current) current.pause();
   current = anime({
-    targets: 'path',
+    targets: "path",
     strokeDashoffset: {
       value: -730,
       duration: 700,
-      easing: 'easeOutQuart'
+      easing: "easeOutQuart",
     },
     strokeDasharray: {
-      value: '530 1386',
+      value: "530 1386",
       duration: 700,
-      easing: 'easeOutQuart'
-    }
+      easing: "easeOutQuart",
+    },
   });
 });
