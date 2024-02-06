@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel serve templates/*.html --open",
     "build": "parcel build templates/*.html --public-url /DIW",
-    "prestart": "prettier . --write"
+    "prestart": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -18,12 +18,12 @@
     "url": "https://github.com/InoreNeronI/DIW/issues"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.10.3",
-    "parcel": "^2.10.3",
+    "@parcel/transformer-sass": "^2.11.0",
+    "parcel": "^2.11.0",
     "parcel-reporter-clean-dist": "^1.0.4",
     "posthtml-extend": "^0.6.5",
     "posthtml-include": "^1.7.4",
-    "prettier": "3.1.0"
+    "prettier": "3.2.5"
   },
   "targets": {
     "default": {
